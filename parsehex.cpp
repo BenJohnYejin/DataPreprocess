@@ -281,7 +281,7 @@ int decodeIPOS3Data(const char *DirIn, const char *fileNameIn, IPOS3Data *IPOS3D
     char fileName[256] = "\0" ;
     sprintf(fileName,"%s%s",DirIn,fileNameIn);
     FILE *fp;
-    if (!(fp=fopen(fileName,"r")))
+    if (!(fp=fopen(fileName,"rb")))
         return 0;
 
     char buff[IPOS3LENGTH58] ;
@@ -358,7 +358,7 @@ int decodeOutIPOS3Data(const char *DirIn, const char *fileName){
     char fileNameIn[256] = "\0" ;
     sprintf(fileNameIn,"%s%s",DirIn,fileName);
     FILE *fpIn,*fpOut;
-    if (!(fpIn=fopen(fileNameIn,"r")))
+    if (!(fpIn=fopen(fileNameIn,"rb")))
         return 0;
 
     char* fileNameOut = fileNameIn;
@@ -412,7 +412,7 @@ int decodeOutIPOS3Data76(const char *DirIn, const char *fileName){
     char fileNameIn[256] = "\0" ;
     sprintf(fileNameIn,"%s%s",DirIn,fileName);
     FILE *fpIn,*fpOut;
-    if (!(fpIn=fopen(fileNameIn,"r")))
+    if (!(fpIn=fopen(fileNameIn,"rb")))
         return 0;
 
     char* fileNameOut = fileNameIn;
@@ -430,7 +430,7 @@ int decodeOutIPOS3Data76(const char *DirIn, const char *fileName){
     fseek(fpIn,buffBias,SEEK_SET);
 
     while( ftell(fpIn) < totalSize ){
-        fread(buff, IPOS3LENGTH76, 1, fpIn);
+        fread(buff,sizeof(char),IPOS3LENGTH76, fpIn);
         if((char)0xBD == buff[0] && (char)0xDB == buff[1] && (char)0x0B == buff[2]){
             memcpy(&IPOS3FrameData_,&buff,IPOS3LENGTH76);
             buffBias+=IPOS3LENGTH76;

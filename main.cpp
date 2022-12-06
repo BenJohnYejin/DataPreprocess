@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 //        break;
 //    }
 
-    char *fileName = "B:\\yj\\01_Code\\97_MyCode\\build-dataprocess\\debug\\config.ini";
+    char *fileName = "B://02_CodeC//09_QTcode//build-Process//debug//config.ini";
     if(!readIni("",fileName,&opt)) {
         printf("there is no ini file!\n");
         return 0;
